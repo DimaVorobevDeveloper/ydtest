@@ -20,4 +20,16 @@ public class UserLogicTests
         count.Should().Be(expectedUsersCount);
         Assert.Pass();
     }
+
+    [Test]
+    public void GetUsers_Count_Fail()
+    {
+        var userLogic = new UserLogic();
+        var users = userLogic.GetUsers();
+        var count = users.Count;
+        var expectedUsersCount = 5;
+        Assert.That(count, Is.EqualTo(expected: expectedUsersCount));
+        count.Should().Be(expectedUsersCount);
+        Assert.Pass();
+    }
 }
