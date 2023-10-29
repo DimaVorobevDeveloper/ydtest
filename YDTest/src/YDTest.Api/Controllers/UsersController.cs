@@ -19,7 +19,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet]
-    public IEnumerable<User> Get()
+    public IEnumerable<UserDto> Get()
     {
         _logger.LogInformation("Get users");
         return _userLogic.GetUsers();

@@ -18,7 +18,7 @@ try
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
 
-    builder.Services.RegisterLogic();
+    builder.Services.RegisterData(builder.Configuration);
 
     // NLog: Setup NLog for Dependency injection
     builder.Logging.ClearProviders();

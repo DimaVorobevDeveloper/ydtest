@@ -1,5 +1,5 @@
 ﻿namespace YDTest.Model;
-public class User
+public class UserDto
 {
     public string Name { get; set; }
 
