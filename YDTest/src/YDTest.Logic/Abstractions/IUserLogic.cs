@@ -4,5 +4,5 @@ namespace YDTest.Logic.Abstractions;
 
 public interface IUserLogic
 {
-    List<User> GetUsers();
+    List<UserDto> GetUsers();
 }

@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Hosting;
 using NLog;
 using NLog.Web;
 using YDTest.Api.Extensions;
@@ -18,18 +17,11 @@ try
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
 
-    builder.Services.RegisterLogic();
+    builder.Services.RegisterData(builder.Configuration);
 
     // NLog: Setup NLog for Dependency injection
     builder.Logging.ClearProviders();
     builder.Host.UseNLog();
-
-    var logger = LoggerFactory.Create(config =>
-    {
-        config.AddConsole();
-        config.AddConfiguration(builder.Configuration.GetSection("Logging"));
-    }).CreateLogger("Program");
-
 
     //builder.Logging.AddFile(o => o.RootPath = o.RootPath = builder.Environment.ContentRootPath);
 
@@ -39,7 +31,6 @@ try
     //         rollingInterval: RollingInterval.Infinite,
     //         outputTemplate: "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff} [{Level}] {Message}{NewLine}{Exception}")
     //     .CreateLogger();
-
 
     var app = builder.Build();
 
@@ -53,7 +44,6 @@ try
     app.UseHttpsRedirection();
 
     app.UseAuthorization();
-    logger1.Info("sssssssssssssssssssssssss Stopped program because of exception");
 
     app.MapControllers();
 
@@ -63,8 +53,6 @@ try
 }
 catch (Exception exception)
 {
-    logger1.Info("s2 - error");
-
-    logger1.Error(exception, exception.Message + " Stopped program because of exception");
-    // logger.LogInformation("this is debug log");
+    logger1.Info("Stopped program because of exception");
+    logger1.Error(exception, exception.Message + "");
 }
