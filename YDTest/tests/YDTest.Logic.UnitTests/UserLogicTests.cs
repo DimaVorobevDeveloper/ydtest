@@ -12,7 +12,7 @@ public class UserLogicTests
     [Test]
     public void GetUsers_Count_Success()
     {
-        var userLogic = new UserLogic();
+        var userLogic = new UserLogic(null);
         var users = userLogic.GetUsers();
         var count = users.Count;
         var expectedUsersCount = 3;
@@ -24,7 +24,7 @@ public class UserLogicTests
     [Test]
     public void GetUsers_Count_Fail()
     {
-        var userLogic = new UserLogic();
+        var userLogic = new UserLogic(null);
         var users = userLogic.GetUsers();
         var count = users.Count;
         var expectedUsersCount = 5;

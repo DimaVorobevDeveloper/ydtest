@@ -1,9 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
 
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
@@ -19,11 +18,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\YDTest.Logic\YDTest.Logic.csproj" />
+    <Folder Include="Mocks\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Mocks\" />
+    <ProjectReference Include="..\..\src\YDTest.Logic\YDTest.Logic.csproj" />
   </ItemGroup>
 
 </Project>

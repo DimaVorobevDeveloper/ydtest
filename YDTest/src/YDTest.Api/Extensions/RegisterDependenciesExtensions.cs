@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using YDTest.Data;
 using YDTest.Logic;
 using YDTest.Logic.Abstractions;
@@ -17,6 +18,31 @@ public static class RegisterDependenciesExtensions
     {
         string connection = configuration.GetConnectionString("DefaultConnection");
         services.AddDbContext<YDTestContext>(options => options.UseSqlServer(connection));
+
+        services.AddDatabaseDeveloperPageExceptionFilter();
+
+        services.CreateDbIfNotExists();
+    }
+
+    private static void CreateDbIfNotExists(this IServiceCollection services)
+    {
+        using ServiceProvider serviceProvider = services.BuildServiceProvider();
+
+        using (var scope = serviceProvider.CreateScope())
+        {
+            var services1 = scope.ServiceProvider;
+            try
+            {
+                var context = services1.GetRequiredService<YDTestContext>();
+                // var context = serviceProvider.GetRequiredService<YDTestContext>();
+                DbInitializer.Initialize(context);
+            }
+            catch (Exception ex)
+            {
+                var logger = services1.GetRequiredService<ILogger<Program>>();
+                logger.LogError(ex, "An error occurred creating the DB.");
+            }
+        }
     }
 
     public static void RegisterLogic(this IServiceCollection services)

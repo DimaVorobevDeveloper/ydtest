@@ -5,19 +5,19 @@ VisualStudioVersion = 17.7.34202.233
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9B5EE4A9-4911-45AA-8332-6B5D55AF0CB5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YDTest.Common", "YDTest.Common\YDTest.Common.csproj", "{839FB5AB-4583-419F-ACF3-CDD8179FF0B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YDTest.Common", "src\YDTest.Common\YDTest.Common.csproj", "{839FB5AB-4583-419F-ACF3-CDD8179FF0B8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YDTest.Api", "src\YDTest.Api\YDTest.Api.csproj", "{8F44B901-16E8-4AD7-8AC1-1B18079F2E12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YDTest.Model", "YDTest.Model\YDTest.Model.csproj", "{2ECE92EF-A076-4EF0-89D4-7C2F158AB7E1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YDTest.Model", "src\YDTest.Model\YDTest.Model.csproj", "{2ECE92EF-A076-4EF0-89D4-7C2F158AB7E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YDTest.Logic", "YDTest.Logic\YDTest.Logic.csproj", "{1FE706F6-6F02-4A8A-AE60-0FD4BF0276B8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YDTest.Logic", "src\YDTest.Logic\YDTest.Logic.csproj", "{1FE706F6-6F02-4A8A-AE60-0FD4BF0276B8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{51E2414E-DBF2-4BBB-ADF9-856031AD3C7B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YDTest.Logic.UnitTests", "tests\YDTest.Logic.UnitTests\YDTest.Logic.UnitTests.csproj", "{2E43C1C0-7B2C-41BE-85B1-E211252AA4BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YDTest.Data", "YDTest.Data\YDTest.Data.csproj", "{F4C53816-BB9F-4106-9065-F313B2E32D53}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YDTest.Data", "src\YDTest.Data\YDTest.Data.csproj", "{F4C53816-BB9F-4106-9065-F313B2E32D53}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

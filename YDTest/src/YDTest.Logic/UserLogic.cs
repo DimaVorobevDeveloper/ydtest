@@ -8,6 +8,11 @@ public class UserLogic : IUserLogic
 {
     private readonly YDTestContext _ydTestContext;
 
+    public UserLogic(YDTestContext ydTestContext)
+    {
+        _ydTestContext = ydTestContext;
+    }
+
     private static readonly string[] Names = new[]
     {
         "Василий", "Василий", "Иван", "Виктор", "Василий", "Виктор", "Balmy", "Владислав", "Виктор", "Сергей"
@@ -27,9 +32,8 @@ public class UserLogic : IUserLogic
     {
         var users = new List<UserDto>();
 
-        using var dbContext = new YDTestContext();
-
-        var usersDb = _ydTestContext.Users.Select(x => x.Name == "name");
+        var usersDb = _ydTestContext.Users;
+        var count = usersDb.Count();
 
         return Enumerable.Range(1, 3).Select(index => new UserDto
         {
