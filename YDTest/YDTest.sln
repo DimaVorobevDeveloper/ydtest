@@ -9,15 +9,25 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YDTest.Common", "src\YDTest
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YDTest.Api", "src\YDTest.Api\YDTest.Api.csproj", "{8F44B901-16E8-4AD7-8AC1-1B18079F2E12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YDTest.Model", "src\YDTest.Model\YDTest.Model.csproj", "{2ECE92EF-A076-4EF0-89D4-7C2F158AB7E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YDTest.Model", "src\YDTest.Model\YDTest.Model.csproj", "{2ECE92EF-A076-4EF0-89D4-7C2F158AB7E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YDTest.Logic", "src\YDTest.Logic\YDTest.Logic.csproj", "{1FE706F6-6F02-4A8A-AE60-0FD4BF0276B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YDTest.Logic", "src\YDTest.Logic\YDTest.Logic.csproj", "{1FE706F6-6F02-4A8A-AE60-0FD4BF0276B8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{51E2414E-DBF2-4BBB-ADF9-856031AD3C7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YDTest.Logic.UnitTests", "tests\YDTest.Logic.UnitTests\YDTest.Logic.UnitTests.csproj", "{2E43C1C0-7B2C-41BE-85B1-E211252AA4BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YDTest.Logic.UnitTests", "tests\YDTest.Logic.UnitTests\YDTest.Logic.UnitTests.csproj", "{2E43C1C0-7B2C-41BE-85B1-E211252AA4BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YDTest.Data", "src\YDTest.Data\YDTest.Data.csproj", "{F4C53816-BB9F-4106-9065-F313B2E32D53}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YDTest.Data", "src\YDTest.Data\YDTest.Data.csproj", "{F4C53816-BB9F-4106-9065-F313B2E32D53}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YDTest.Tests.Infrastructure", "tests\YDTest.Tests.Infrastructure\YDTest.Tests.Infrastructure.csproj", "{9BED9140-5D70-4E88-AC3C-4760507FB9A6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YDTest.IntegrationsTests.Api", "tests\YDTest.IntegrationsTests.Api\YDTest.IntegrationsTests.Api.csproj", "{D29B93D7-2AC8-4074-9751-19F5CF4CC7E2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{B5CBDF19-2917-46B1-8D21-29F417C60074}"
+	ProjectSection(SolutionItems) = preProject
+		change.log = change.log
+		Read.MD = Read.MD
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +59,14 @@ Global
 		{F4C53816-BB9F-4106-9065-F313B2E32D53}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4C53816-BB9F-4106-9065-F313B2E32D53}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4C53816-BB9F-4106-9065-F313B2E32D53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BED9140-5D70-4E88-AC3C-4760507FB9A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BED9140-5D70-4E88-AC3C-4760507FB9A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BED9140-5D70-4E88-AC3C-4760507FB9A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BED9140-5D70-4E88-AC3C-4760507FB9A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D29B93D7-2AC8-4074-9751-19F5CF4CC7E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D29B93D7-2AC8-4074-9751-19F5CF4CC7E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D29B93D7-2AC8-4074-9751-19F5CF4CC7E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D29B93D7-2AC8-4074-9751-19F5CF4CC7E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +78,8 @@ Global
 		{1FE706F6-6F02-4A8A-AE60-0FD4BF0276B8} = {9B5EE4A9-4911-45AA-8332-6B5D55AF0CB5}
 		{2E43C1C0-7B2C-41BE-85B1-E211252AA4BD} = {51E2414E-DBF2-4BBB-ADF9-856031AD3C7B}
 		{F4C53816-BB9F-4106-9065-F313B2E32D53} = {9B5EE4A9-4911-45AA-8332-6B5D55AF0CB5}
+		{9BED9140-5D70-4E88-AC3C-4760507FB9A6} = {51E2414E-DBF2-4BBB-ADF9-856031AD3C7B}
+		{D29B93D7-2AC8-4074-9751-19F5CF4CC7E2} = {51E2414E-DBF2-4BBB-ADF9-856031AD3C7B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6687B0C1-AE6D-4D45-8496-089CBB81F7FC}

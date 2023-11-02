@@ -1,4 +1,9 @@
-﻿using YDTest.Data;
+﻿using AutoMapper;
+using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using YDTest.Common.Models;
+using YDTest.Data;
+using YDTest.Data.Entities;
 using YDTest.Logic.Abstractions;
 using YDTest.Model;
 
@@ -7,40 +12,46 @@ namespace YDTest.Logic;
 public class UserLogic : IUserLogic
 {
     private readonly YDTestContext _ydTestContext;
+    private readonly ILogger<UserLogic> _logger;
+    private readonly IMapper _mapper;
 
-    public UserLogic(YDTestContext ydTestContext)
+    public UserLogic(YDTestContext ydTestContext, ILogger<UserLogic> logger, IMapper mapper)
     {
         _ydTestContext = ydTestContext;
+        _logger = logger;
+        _mapper = mapper;
     }
-
-    private static readonly string[] Names = new[]
-    {
-        "Василий", "Василий", "Иван", "Виктор", "Василий", "Виктор", "Balmy", "Владислав", "Виктор", "Сергей"
-    };
-
-    private static readonly string[] Emails = new[]
-    {
-        "video.1kito@gmail.com", "photo.1kito@gmail.com", "ramil.1kito@gmail.com", "sushi.1kito@gmail.com", "video.1kito@gmail.com"
-    };
-
-    private static readonly string[] Cities = new[]
-    {
-        "Зеленодольск", "Казань", "Саратов", "Набережные челны", "Саратов", "Саратов", "Саратов", "Саратов", "Саратов", "Саратов"
-    };
 
     public List<UserDto> GetUsers()
     {
-        var users = new List<UserDto>();
-
         var usersDb = _ydTestContext.Users;
-        var count = usersDb.Count();
+        var usersDto = _mapper.Map<List<UserDto>>(usersDb);
+        return usersDto;
+    }
 
-        return Enumerable.Range(1, 3).Select(index => new UserDto
+    public async Task<UserDto> GetUser(string id)
+    {
+        var userDb = await _ydTestContext.Users.SingleOrDefaultAsync(x => x.Id == new Guid(id));
+        var userDto = _mapper.Map<UserDto>(userDb);
+
+        return userDto;
+    }
+
+    public async Task<UserDto> CreateUser(CreateUserRequest request)
+    {
+        var user = _mapper.Map<User>(request);
+        user.Created = DateTime.Now;
+
+        var usersDb = await _ydTestContext.AddAsync(user);
+        var saved = await _ydTestContext.SaveChangesAsync();
+
+        if (saved == 0)
         {
-            Name = Names[Random.Shared.Next(Names.Length)],
-            Birth = DateTime.Now.AddYears(-Random.Shared.Next(10, 55)),
-            Email = Emails[Random.Shared.Next(Emails.Length)],
-            City = Cities[Random.Shared.Next(Cities.Length)],
-        }).ToList();
+            throw new Exception("Save error");
+        }
+
+        var userDto = _mapper.Map<UserDto>(usersDb.Entity);
+
+        return userDto;
     }
 }
