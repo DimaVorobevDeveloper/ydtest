@@ -19,9 +19,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YDTest.Logic.UnitTests", "t
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YDTest.Data", "src\YDTest.Data\YDTest.Data.csproj", "{F4C53816-BB9F-4106-9065-F313B2E32D53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YDTest.Tests.Infrastructure", "tests\YDTest.Tests.Infrastructure\YDTest.Tests.Infrastructure.csproj", "{9BED9140-5D70-4E88-AC3C-4760507FB9A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YDTest.Tests.Infrastructure", "tests\YDTest.Tests.Infrastructure\YDTest.Tests.Infrastructure.csproj", "{9BED9140-5D70-4E88-AC3C-4760507FB9A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YDTest.IntegrationsTests.Api", "tests\YDTest.IntegrationsTests.Api\YDTest.IntegrationsTests.Api.csproj", "{D29B93D7-2AC8-4074-9751-19F5CF4CC7E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YDTest.IntegrationsTests.Api", "tests\YDTest.IntegrationsTests.Api\YDTest.IntegrationsTests.Api.csproj", "{D29B93D7-2AC8-4074-9751-19F5CF4CC7E2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{B5CBDF19-2917-46B1-8D21-29F417C60074}"
+	ProjectSection(SolutionItems) = preProject
+		change.log = change.log
+		Read.MD = Read.MD
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

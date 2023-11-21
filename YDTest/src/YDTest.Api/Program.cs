@@ -3,6 +3,8 @@ using NLog.Web;
 using YDTest.Api.Extensions;
 
 var logger1 = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
+logger1.Info("init main");
+
 try
 {
     var builder = WebApplication.CreateBuilder(args);
@@ -17,11 +19,16 @@ try
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
 
-    builder.Services.RegisterData(builder.Configuration);
+    builder.Services.RegisterData(builder.Configuration, builder.Environment);
 
     // NLog: Setup NLog for Dependency injection
     builder.Logging.ClearProviders();
     builder.Host.UseNLog();
+
+    //var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
+    //builder.Services.AddSingleton(logger);
+
+    //builder.Logging.Services.AddLogging();
 
     //builder.Logging.AddFile(o => o.RootPath = o.RootPath = builder.Environment.ContentRootPath);
 
@@ -34,6 +41,7 @@ try
 
     var app = builder.Build();
 
+    // https://github.com/NLog/NLog/wiki/Getting-started-with-ASP.NET-Core-6
     // Configure the HTTP request pipeline.
     //if (app.Environment.IsDevelopment())
     //{
@@ -42,6 +50,7 @@ try
     //}
 
     app.UseHttpsRedirection();
+    app.UseStaticFiles();
 
     app.UseAuthorization();
 

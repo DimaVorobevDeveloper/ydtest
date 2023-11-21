@@ -37,7 +37,7 @@ public class UserLogicTests : BaseUnitTests
     [Test]
     public void GetUsers_Count_Success()
     {
-        var userLogic = new UserLogic(null);
+        var userLogic = new UserLogic(null, null, null);
         var users = userLogic.GetUsers();
         var count = users.Count;
         var expectedUsersCount = 3;
@@ -59,7 +59,7 @@ public class UserLogicTests : BaseUnitTests
 
         var t = CreateContextMock(t1.ToArray());
 
-        var userLogic = new UserLogic(t);
+        var userLogic = new UserLogic(t, null, null);
         var users = userLogic.GetUsers();
         var count = users.Count;
         var expectedUsersCount = 3;

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using NLog;
+using NLog.Web;
 using YDTest.Data.Entities;
 
 namespace YDTest.Data
@@ -8,11 +10,16 @@ namespace YDTest.Data
     {
         public static void Initialize(YDTestContext context)
         {
+            var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
+            logger.Info("context.Database.EnsureCreated()");
+
             context.Database.EnsureCreated();
 
             // Look for any students.
             if (context.Users.Any())
             {
+                logger.Info("context.Users.Any()");
+
                 return;   // DB has been seeded
             }
 
@@ -35,6 +42,9 @@ namespace YDTest.Data
             {
                 context.Users.Add(s);
             }
+
+            logger.Info("context.SaveChanges()");
+
             context.SaveChanges();
 
             //var courses = new Course[]

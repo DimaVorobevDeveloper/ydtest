@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using YDTest.Common.Models;
 using YDTest.Logic.Abstractions;
 using YDTest.Model;
 
@@ -21,7 +21,29 @@ public class UsersController : ControllerBase
     [HttpGet]
     public IEnumerable<UserDto> Get()
     {
+        try
+        {
+            _logger.LogInformation("Get users");
+            return _userLogic.GetUsers();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError("Get users error: " + ex.Message);
+            throw;
+        }
+    }
+
+    [HttpGet("{id}")]
+    public async Task<UserDto> Get(string id)
+    {
         _logger.LogInformation("Get users");
-        return _userLogic.GetUsers();
+        return await _userLogic.GetUser(id);
+    }
+
+    [HttpPost]
+    public async Task<UserDto> Create(CreateUserRequest model)
+    {
+        _logger.LogInformation("Create user");
+        return await _userLogic.CreateUser(model);
     }
 }

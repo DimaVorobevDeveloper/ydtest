@@ -1,15 +1,19 @@
-﻿using YDTest.Model.Abstractions;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace YDTest.Model;
+namespace YDTest.Common.Models;
 
-public class UserDto : UserBaseDto
+public class CreateUserRequest
 {
+    [Required]
     public string Name { get; set; }
 
+    [Required]
     public string LastName { get; set; }
 
+    [Required]
     public string Email { get; set; }
 
+    [Required]
     public string Password { get; set; }
 
     /// <summary>
@@ -17,7 +21,6 @@ public class UserDto : UserBaseDto
     /// </summary>
     public DateTime Birth { get; set; }
 
-    public int Age { get; set; }
-
+    [Required]
     public string City { get; set; }
 }
