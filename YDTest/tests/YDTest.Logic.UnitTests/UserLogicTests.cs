@@ -1,15 +1,18 @@
+using AutoMapper;
 using FluentAssertions;
 using Moq;
 using Xunit.Abstractions;
+using YDTest.Api.Configuration;
 using YDTest.Data;
 using YDTest.Data.Entities;
 using YDTest.Logic.UnitTests.Mocks;
-using YDTest.Model;
 
 namespace YDTest.Logic.UnitTests;
 
-public class UserLogicTests : BaseUnitTests
+public class UserLogicTests : BaseUnitTest
 {
+    private readonly IMapper _mapper;
+
     private static readonly string[] Names = new[]
     {
         "Василий", "Василий", "Иван", "Виктор", "Василий", "Виктор", "Balmy", "Владислав", "Виктор", "Сергей"
@@ -25,9 +28,15 @@ public class UserLogicTests : BaseUnitTests
         "Зеленодольск", "Казань", "Саратов", "Набережные челны", "Саратов", "Саратов", "Саратов", "Саратов", "Саратов", "Саратов"
     };
 
-    //public UserLogicTests(ITestOutputHelper output) : base(output)
-    //{
-    //}
+    public UserLogicTests()
+    {
+        var mapperConfiguration = new MapperConfiguration(mc =>
+        {
+            mc.AddProfile(new UserProfile());
+            // mc.AddProfile(new DomainMappingProfile());
+        });
+        _mapper = new Mapper(mapperConfiguration);
+    }
 
     [SetUp]
     public void Setup()
@@ -37,9 +46,12 @@ public class UserLogicTests : BaseUnitTests
     [Test]
     public void GetUsers_Count_Success()
     {
-        var userLogic = new UserLogic(null, null, null);
-        var users = userLogic.GetUsers();
-        var count = users.Count;
+        var users = CreateFakeUsers();
+        var dbContext = CreateContextMock(users);
+
+        var userLogic = new UserLogic(dbContext, null, _mapper);
+        var usersDto = userLogic.GetUsers();
+        var count = usersDto.Count;
         var expectedUsersCount = 3;
         Assert.That(count, Is.EqualTo(expected: expectedUsersCount));
         count.Should().Be(expectedUsersCount);
@@ -49,25 +61,17 @@ public class UserLogicTests : BaseUnitTests
     [Test]
     public void GetUsers_Count_Fail()
     {
-        var t1 = Enumerable.Range(1, 3).Select(index => new User
-        {
-            Name = Names[Random.Shared.Next(Names.Length)],
-            Birth = DateTime.Now.AddYears(-Random.Shared.Next(10, 55)),
-            Email = Emails[Random.Shared.Next(Emails.Length)],
-            City = Cities[Random.Shared.Next(Cities.Length)],
-        }).ToList();
+        var users = CreateFakeUsers();
+        var dbContext = CreateContextMock(users);
 
-        var t = CreateContextMock(t1.ToArray());
-
-        var userLogic = new UserLogic(t, null, null);
-        var users = userLogic.GetUsers();
-        var count = users.Count;
+        var userLogic = new UserLogic(dbContext, null, _mapper);
+        var usersDto = userLogic.GetUsers();
+        var count = usersDto.Count;
         var expectedUsersCount = 3;
         Assert.That(count, Is.EqualTo(expected: expectedUsersCount));
         count.Should().Be(expectedUsersCount);
         // Assert.Pass();
     }
-
 
     protected YDTestContext CreateContextMock(User[] set)
     {
@@ -76,5 +80,18 @@ public class UserLogicTests : BaseUnitTests
         fakeDbContext.UseSet(set);
         fakeDbContext.Object.ChangeTracker.Clear();
         return fakeDbContext.Object;
+    }
+
+    protected User[] CreateFakeUsers()
+    {
+        var users = Enumerable.Range(1, 3).Select(index => new User
+        {
+            Name = Names[Random.Shared.Next(Names.Length)],
+            Birth = DateTime.Now.AddYears(-Random.Shared.Next(10, 55)),
+            Email = Emails[Random.Shared.Next(Emails.Length)],
+            City = Cities[Random.Shared.Next(Cities.Length)],
+        });
+
+        return users.ToArray();
     }
 }
