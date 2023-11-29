@@ -7,12 +7,12 @@ namespace YDTest.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class UsersController : ControllerBase
+public class UserTeamController : ControllerBase
 {
     private readonly IUserLogic _userLogic;
     private readonly ILogger<UsersController> _logger;
 
-    public UsersController(IUserLogic userLogic, ILogger<UsersController> logger)
+    public UserTeamController(IUserLogic userLogic, ILogger<UsersController> logger)
     {
         _userLogic = userLogic;
         _logger = logger;
@@ -46,7 +46,7 @@ public class UsersController : ControllerBase
         _logger.LogInformation("Create user");
         return await _userLogic.CreateUser(model);
     }
-    
+
     [HttpPut("{id}")]
     public async Task<UserDto> Update(string id, UpdateUserRequest model)
     {

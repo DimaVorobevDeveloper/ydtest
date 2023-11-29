@@ -16,4 +16,8 @@
     <Folder Include="Migrations\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\YDTest.Model\YDTest.Model.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -2,7 +2,7 @@
 
 namespace YDTest.Model;
 
-public class UserDto : UserBaseDto
+public class UserDto : EntityBaseDto
 {
     public string Name { get; set; }
 
@@ -20,4 +20,6 @@ public class UserDto : UserBaseDto
     public int Age { get; set; }
 
     public string City { get; set; }
+
+    public List<TeamDto> Teams { get; } = new();
 }

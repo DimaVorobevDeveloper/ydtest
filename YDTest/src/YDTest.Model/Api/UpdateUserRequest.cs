@@ -1,15 +1,19 @@
-﻿using YDTest.Data.Abstractions;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace YDTest.Data.Entities;
+namespace YDTest.Model.Api;
 
-public class User : EntityBase
+public class UpdateUserRequest
 {
+    [Required]
     public string Name { get; set; }
 
+    [Required]
     public string LastName { get; set; }
 
+    [Required]
     public string Email { get; set; }
 
+    [Required]
     public string Password { get; set; }
 
     /// <summary>
@@ -17,9 +21,6 @@ public class User : EntityBase
     /// </summary>
     public DateTime Birth { get; set; }
 
+    [Required]
     public string City { get; set; }
-
-    public List<UserTeam> UserTeams { get; } = new();
-
-    public List<Team> Teams { get; } = new();
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using YDTest.Data;
 
@@ -11,9 +12,11 @@ using YDTest.Data;
 namespace YDTest.Data.Migrations
 {
     [DbContext(typeof(YDTestContext))]
-    partial class YDTestContextModelSnapshot : ModelSnapshot
+    [Migration("20231203112653_AddBaseToTeam")]
+    partial class AddBaseToTeam
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

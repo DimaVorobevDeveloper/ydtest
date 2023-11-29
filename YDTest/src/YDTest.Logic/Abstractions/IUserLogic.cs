@@ -1,5 +1,5 @@
-﻿using YDTest.Common.Models;
-using YDTest.Model;
+﻿using YDTest.Model;
+using YDTest.Model.Api;
 
 namespace YDTest.Logic.Abstractions;
 
@@ -10,4 +10,6 @@ public interface IUserLogic
     Task<UserDto> GetUser(string id);
 
     Task<UserDto> CreateUser(CreateUserRequest request);
+
+    Task<UserDto> UpdateUser(string id, UpdateUserRequest request);
 }

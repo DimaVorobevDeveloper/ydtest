@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using NLog;
 using NLog.Web;
 using YDTest.Data.Entities;
@@ -15,6 +18,8 @@ namespace YDTest.Data
 
             context.Database.EnsureCreated();
 
+            context.MigrateUp().Wait();
+
             // Look for any students.
             if (context.Users.Any())
             {
@@ -28,7 +33,7 @@ namespace YDTest.Data
                  new User
                  {
                      Name="Carson", LastName="Alexander", Birth = DateTime.Parse("2005-09-01"),
-                     City = "Зеленодольск", Created = DateTime.Parse("2005-09-01"), Email = "video.1kito@gmail.com"
+                     City = "Зеленодольск", Created = DateTime.Parse("2005-09-01"), Modified = DateTime.Parse("2005-09-01"), Email = "video.1kito@gmail.com"
                  },
             //new Student{FirstMidName="Meredith",LastName="Alonso",EnrollmentDate=DateTime.Parse("2002-09-01")},
             //new Student{FirstMidName="Arturo",LastName="Anand",EnrollmentDate=DateTime.Parse("2003-09-01")},
@@ -40,12 +45,12 @@ namespace YDTest.Data
             };
             foreach (User s in users)
             {
-                context.Users.Add(s);
+                //context.Users.Add(s);
             }
 
             logger.Info("context.SaveChanges()");
 
-            context.SaveChanges();
+            //context.SaveChanges();
 
             //var courses = new Course[]
             //{
@@ -83,6 +88,21 @@ namespace YDTest.Data
             //    context.Enrollments.Add(e);
             //}
             //context.SaveChanges();
+        }
+
+        public static async Task MigrateUp(this YDTestContext context)
+        {
+            var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
+            logger.Info("pendingMigrations");
+
+            var pendingMigrations = await context.Database.GetPendingMigrationsAsync();
+
+            if (pendingMigrations.Any())
+            {
+                logger.Info("pendingMigrations count: " + pendingMigrations.Count());
+                var migrator = context.Database.GetService<IMigrator>();
+                await migrator.MigrateAsync();
+            }
         }
     }
 }

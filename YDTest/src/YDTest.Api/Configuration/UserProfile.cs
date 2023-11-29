@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using YDTest.Common.Models;
 using YDTest.Data.Entities;
 using YDTest.Model;
+using YDTest.Model.Api;
 
 namespace YDTest.Api.Configuration;
 
