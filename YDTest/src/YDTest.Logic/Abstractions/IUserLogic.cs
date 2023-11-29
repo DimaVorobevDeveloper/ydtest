@@ -10,4 +10,6 @@ public interface IUserLogic
     Task<UserDto> GetUser(string id);
 
     Task<UserDto> CreateUser(CreateUserRequest request);
+
+    Task<UserDto> UpdateUser(string id, UpdateUserRequest request);
 }

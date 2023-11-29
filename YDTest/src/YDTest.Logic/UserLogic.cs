@@ -42,7 +42,26 @@ public class UserLogic : IUserLogic
         var user = _mapper.Map<User>(request);
         user.Created = DateTime.Now;
 
-        var usersDb = await _ydTestContext.AddAsync(user);
+        var userDb = await _ydTestContext.AddAsync(user);
+        var userDto = await Save(userDb.Entity);
+        
+        return userDto;
+    }
+
+    public async Task<UserDto> UpdateUser(string id, UpdateUserRequest request)
+    {
+        await CheckIfUserExisted(id);
+        
+        var userDb = _mapper.Map<User>(request);
+        userDb.Id = new Guid(id);
+        userDb.Modified = DateTime.Now;
+
+        var userDto = await Save(userDb);
+        return userDto;
+    }
+
+    private async Task<UserDto> Save(User userDb)
+    {
         var saved = await _ydTestContext.SaveChangesAsync();
 
         if (saved == 0)
@@ -50,8 +69,18 @@ public class UserLogic : IUserLogic
             throw new Exception("Save error");
         }
 
-        var userDto = _mapper.Map<UserDto>(usersDb.Entity);
+        var userDto = _mapper.Map<UserDto>(userDb);
 
         return userDto;
+    }
+
+    private async Task CheckIfUserExisted(string id)
+    {
+        var userDb = await _ydTestContext.Users.SingleOrDefaultAsync(x=> x.Id == new Guid(id));
+
+        if (userDb != null)
+        {
+            throw new Exception($"User with id {id} not found");
+        }
     }
 }

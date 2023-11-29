@@ -1,0 +1,14 @@
+﻿using YDTest.Data.Abstractions;
+
+namespace YDTest.Data.Entities;
+
+public class UserTeam : EntityBase
+{
+    public Guid UserId { get; set; }
+    
+    public Guid TeamId { get; set; }
+
+    public User User { get; set; } = null!;
+
+    public Team Team { get; set; } = null!;
+}

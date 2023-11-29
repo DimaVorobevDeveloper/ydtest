@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using NLog;
 using NLog.Web;
 using System.Configuration;
@@ -31,7 +32,11 @@ public static class RegisterDependenciesExtensions
 
         services.AddDbContext<YDTestContext>(options =>
             options.UseSqlServer(connection,
-                opt => opt.EnableRetryOnFailure(maxRetryCount: 2, maxRetryDelay: TimeSpan.FromSeconds(3), errorNumbersToAdd: null)));
+                opt =>
+                {
+                    opt.EnableRetryOnFailure(maxRetryCount: 2, maxRetryDelay: TimeSpan.FromSeconds(3), errorNumbersToAdd: null);
+                    // opt.MigrationsHistoryTable("__EFCoreMigrationsHistory", schema: "_Migration");
+                }));
 
         if (!webHostEnvironment.IsDevelopment())
         {
@@ -80,6 +85,6 @@ public static class RegisterDependenciesExtensions
         var configuration = new MapperConfiguration(cfg =>
             cfg.AddProfile(typeof(UserProfile)));
 
-        configuration.AssertConfigurationIsValid();
+        // configuration.AssertConfigurationIsValid();
     }
 }

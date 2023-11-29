@@ -46,4 +46,11 @@ public class UsersController : ControllerBase
         _logger.LogInformation("Create user");
         return await _userLogic.CreateUser(model);
     }
+    
+    [HttpPut("{id}")]
+    public async Task<UserDto> Update(string id, UpdateUserRequest model)
+    {
+        _logger.LogInformation("Update user");
+        return await _userLogic.UpdateUser(id, model);
+    }
 }
