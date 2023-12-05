@@ -17,6 +17,7 @@ public class MappingTests : BaseUnitTest
         {
             mc.AddProfile(new UserProfile());
             mc.AddProfile(new TeamProfile());
+            mc.AddProfile(new UserTeamProfile());
         });
         _mapper = new Mapper(mapperConfiguration);
     }

@@ -1,6 +1,8 @@
-﻿namespace YDTest.Model;
+﻿using YDTest.Model.Abstractions;
 
-public class UserTeamDto
+namespace YDTest.Model.Dto;
+
+public class UserTeamDto : EntityBaseDto
 {
     public Guid UserId { get; set; }
 

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using YDTest.Model;
 using YDTest.Model.Abstractions;
+using YDTest.Model.Dto;
 using YDTest.Model.Enums;
 
 namespace YDTest.Model.Api;

@@ -75,8 +75,12 @@ public static class RegisterDependenciesExtensions
 
     public static void RegisterLogic(this IServiceCollection services)
     {
+        services.AddTransient<UnitOfWork>();
+
         services.AddScoped<IUserLogic, UserLogic>();
         services.AddScoped<ITeamLogic, TeamLogic>();
+        services.AddScoped<ILogsLogic, LogsLogic>();
+        services.AddScoped<IUserTeamLogic, UserTeamLogic>();
     }
 
     public static void RegisterMapperConfiguration(this IServiceCollection services)

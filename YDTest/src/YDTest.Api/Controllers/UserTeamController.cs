@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using YDTest.Logic.Abstractions;
-using YDTest.Model;
 using YDTest.Model.Api;
+using YDTest.Model.Dto;
 
 namespace YDTest.Api.Controllers;
 
@@ -9,48 +9,52 @@ namespace YDTest.Api.Controllers;
 [ApiController]
 public class UserTeamController : ControllerBase
 {
-    private readonly IUserLogic _userLogic;
-    private readonly ILogger<UsersController> _logger;
+    private readonly IUserTeamLogic _userTeamLogic;
+    private readonly UnitOfWork _unitOfWork;
+    private readonly ILogger<UserTeamController> _logger;
 
-    public UserTeamController(IUserLogic userLogic, ILogger<UsersController> logger)
+    public UserTeamController(IUserTeamLogic userTeamLogic, UnitOfWork unitOfWork, ILogger<UserTeamController> logger)
     {
-        _userLogic = userLogic;
+        _userTeamLogic = userTeamLogic;
+        _unitOfWork = unitOfWork;
         _logger = logger;
     }
 
     [HttpGet]
-    public IEnumerable<UserDto> Get()
+    public IEnumerable<UserTeamDto> Get()
     {
         try
         {
-            _logger.LogInformation("Get users");
-            return _userLogic.GetUsers();
+            _logger.LogInformation("Get user team");
+            return _userTeamLogic.GetUserTeams();
         }
         catch (Exception ex)
         {
-            _logger.LogError("Get users error: " + ex.Message);
+            _logger.LogError("Get user team error: " + ex.Message);
             throw;
         }
     }
 
     [HttpGet("{id}")]
-    public async Task<UserDto> Get(string id)
+    public async Task<UserTeamDto> Get(string id)
     {
-        _logger.LogInformation("Get users");
-        return await _userLogic.GetUser(id);
+        _logger.LogInformation("Get user teams");
+        
+        var t = await _userTeamLogic.GetUserTeam2(id);
+        return await _userTeamLogic.GetUserTeam(id);
     }
 
     [HttpPost]
-    public async Task<UserDto> Create(CreateUserRequest model)
+    public async Task<UserTeamDto> Create(CreateUserTeamRequest model)
     {
-        _logger.LogInformation("Create user");
-        return await _userLogic.CreateUser(model);
+        _logger.LogInformation("Create user team");
+        return await _userTeamLogic.CreateUserTeam(model);
     }
 
-    [HttpPut("{id}")]
-    public async Task<UserDto> Update(string id, UpdateUserRequest model)
+    [HttpDelete("{id}")]
+    public async Task<UserTeamDto> Update(string id)
     {
-        _logger.LogInformation("Update user");
-        return await _userLogic.UpdateUser(id, model);
+        _logger.LogInformation("Delete user team");
+        return await _userTeamLogic.DeleteUserTeam(id);
     }
 }

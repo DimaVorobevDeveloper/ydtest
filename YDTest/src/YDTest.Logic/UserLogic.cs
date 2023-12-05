@@ -4,8 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using YDTest.Data;
 using YDTest.Data.Entities;
 using YDTest.Logic.Abstractions;
-using YDTest.Model;
 using YDTest.Model.Api;
+using YDTest.Model.Dto;
 
 namespace YDTest.Logic;
 
@@ -78,7 +78,7 @@ public class UserLogic : IUserLogic
     {
         var userDb = await _ydTestContext.Users.SingleOrDefaultAsync(x=> x.Id == new Guid(id));
 
-        if (userDb != null)
+        if (userDb == null)
         {
             throw new Exception($"User with id {id} not found");
         }

@@ -1,6 +1,6 @@
 ﻿using YDTest.Model.Abstractions;
 
-namespace YDTest.Model;
+namespace YDTest.Model.Dto;
 
 public class UserDto : EntityBaseDto
 {

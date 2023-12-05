@@ -1,7 +1,7 @@
 ﻿using YDTest.Model.Abstractions;
 using YDTest.Model.Enums;
 
-namespace YDTest.Model;
+namespace YDTest.Model.Dto;
 
 public class TeamDto : EntityBaseDto
 {
