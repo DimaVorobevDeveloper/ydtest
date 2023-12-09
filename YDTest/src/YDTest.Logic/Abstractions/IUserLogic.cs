@@ -1,5 +1,5 @@
-﻿using YDTest.Common.Models;
-using YDTest.Model;
+﻿using YDTest.Model.Api;
+using YDTest.Model.Dto;
 
 namespace YDTest.Logic.Abstractions;
 

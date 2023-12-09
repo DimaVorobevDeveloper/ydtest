@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using YDTest.Common.Models;
 using YDTest.Logic.Abstractions;
-using YDTest.Model;
+using YDTest.Model.Api;
+using YDTest.Model.Dto;
 
 namespace YDTest.Api.Controllers;
 

@@ -9,10 +9,9 @@ public class YDTestContext : DbContext
 
     public DbSet<UserToken> UserTokens { get; set; }
 
-    public DbSet<UserTeam> UserTeams { get; set; }
+    public DbSet<Team> Teams { get; set; }
 
-    //public YDTestContext()
-    //{ }
+    public DbSet<UserTeam> UserTeams { get; set; }
 
     public YDTestContext(DbContextOptions<YDTestContext> options)
         : base(options)
@@ -22,7 +21,7 @@ public class YDTestContext : DbContext
     {
         modelBuilder.Entity<User>().ToTable("Users");
         modelBuilder.Entity<UserToken>().ToTable("UserTokens");
-
+        modelBuilder.Entity<Team>().ToTable("Teams");
         modelBuilder.Entity<UserTeam>().ToTable("UserTeams");
         //modelBuilder.Entity<UserTeam>()
         //    .HasMany(e => e.User)

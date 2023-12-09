@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using YDTest.Common.Models;
 using YDTest.Data.Entities;
-using YDTest.Model;
+using YDTest.Model.Api;
+using YDTest.Model.Dto;
 
 namespace YDTest.Api.Configuration;
 
@@ -10,6 +10,7 @@ public class UserProfile : Profile
     public UserProfile()
     {
         CreateMap<CreateUserRequest, User>(MemberList.Source);
+        CreateMap<UpdateUserRequest, User>(MemberList.Source);
         CreateMap<User, UserDto>(MemberList.Source)
             .ForMember(x => x.Age, opt => opt.MapFrom(x => GetAge(x.Birth)));
     }

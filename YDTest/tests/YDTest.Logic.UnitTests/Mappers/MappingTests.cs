@@ -1,10 +1,9 @@
 ﻿using AutoFixture;
 using AutoMapper;
 using FluentAssertions;
-using Xunit.Abstractions;
 using YDTest.Api.Configuration;
-using YDTest.Common.Models;
 using YDTest.Data.Entities;
+using YDTest.Model.Api;
 
 namespace YDTest.Logic.UnitTests.Mappers;
 
@@ -17,7 +16,8 @@ public class MappingTests : BaseUnitTest
         var mapperConfiguration = new MapperConfiguration(mc =>
         {
             mc.AddProfile(new UserProfile());
-            // mc.AddProfile(new DomainMappingProfile());
+            mc.AddProfile(new TeamProfile());
+            mc.AddProfile(new UserTeamProfile());
         });
         _mapper = new Mapper(mapperConfiguration);
     }

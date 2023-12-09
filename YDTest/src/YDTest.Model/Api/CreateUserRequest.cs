@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using YDTest.Model.Abstractions;
 
-namespace YDTest.Common.Models;
+namespace YDTest.Model.Api;
 
 public class CreateUserRequest
 {
